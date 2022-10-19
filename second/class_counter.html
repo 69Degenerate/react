@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="ro"></div>
+    <script>
+
+        class Counter extends React.Component {
+            state = {
+              counter: 0
+            }
+            increment = () => {
+              this.setState({counter: this.state.counter+1});
+            }
+            render() {
+              return <div>
+              <p>{this.state.counter}</p>
+              <button onClick={this.increment}>Increment</button>
+              </div>;
+            }
+          }
+          
+          const el = <Counter />; 
+          ReactDOM.render(
+            el, 
+            document.getElementById('ro')
+          );
+    </script>
+</body>
+</html>

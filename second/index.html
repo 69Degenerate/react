@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        function Words(props)
+        {
+            var num=props.n1+props.n2
+            return <h1>{num} swellll {props.name} {props.id}</h1>
+        }
+        class H extends React.Component
+        {
+            state={q:32}
+            render()
+            {
+                var num=this.props.n1+this.props.n2
+                return <h3>{this.state.q} siiott drdrts {this.props.name} {this.props.id} {num}</h3>
+            }
+        }
+        let e=<Words name="reted" id="231" n1="1" n2="2"/>;
+        let er=<H name="reted" id="231" n1="1" n2="2"/>
+        let counter = 0;
+        function show()
+        {
+          counter++;
+          const el = <h2>{e}start da count {counter} {er}</h2>;
+          ReactDOM.render(el, document.getElementById('root'));
+        }
+        setInterval(show, 1000); 
+    </script>
+
+  </body>
+</html>
