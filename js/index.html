@@ -12,46 +12,46 @@
 </head>
 
 <body style="background-color: rgb(15, 15, 15)">
-  <nav class="navbar navbar-expand-sm  navbar-dark bg-dark">
-    <a class="navbar-brand" href="#"><h4><b>Home</b></h4></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    
+  
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav mr-auto">
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Gerne
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Thriller</a></li>
-            <li><a class="dropdown-item" href="#">Mystery</a></li>
-            <li><a class="dropdown-item" href="#">Thriller</a></li>
-            <li><a class="dropdown-item" href="#">sci-fi</a></li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Thriller</a>
+            <a class="dropdown-item" href="#">Mystery</a>
+            <a class="dropdown-item" href="#">Thriller</a>
+            <a class="dropdown-item" href="#">sci-fi</a>
+          </div>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Year
           </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">2012</a></li>
-            <li><a class="dropdown-item" href="#">2013</a></li>
-            <li><a class="dropdown-item" href="#">2014</a></li>
-            <li><a class="dropdown-item" href="#">2015</a></li>
-            <li><a class="dropdown-item" href="#">2016</a></li>
-          </ul>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">2012</a>
+              <a class="dropdown-item" href="#">2013</a>
+              <a class="dropdown-item" href="#">2014</a>
+              <a class="dropdown-item" href="#">2015</a>
+              <a class="dropdown-item" href="#">2016</a>
+          </div>
+        </li>
         <li class="nav-item">
-          <a class="nav-link disabled">Disabled</a>
+          <a class="nav-link disabled" href="#">Disabled</a>
         </li>
       </ul>
-    </div>
-    <div class="form-inline my-2 my-lg-0">
-      <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button id="sear" class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="find()" href="#">Search</button>
+      <div class="form-inline my-2 my-lg-0">
+        <input id="search" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button id="sear" class="btn btn-outline-success my-2 my-sm-0" type="submit" onclick="find()" href="#">Search</button>
+      </div>
     </div>
   </nav>
   <div class="container my-4">
