@@ -13,7 +13,7 @@
 
 <body style="background-color: rgb(15, 15, 15)">
   <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">Home</a>
+    <a class="navbar-brand" href="#" onclick="fread()">Home</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -58,36 +58,63 @@
     <div id="cont" class="row">
     </div>
   </div>
-    <script>
-      async function fread() {
-        var f = await fetch('https://moviespaceproj.herokuapp.com/apiread');
-        var data = await f.json();
+  <script>
+    async function fread() {
+      let f = await fetch('https://moviespaceproj.herokuapp.com/apiread');
+      let data = await f.json();
+      document.getElementById('cont').innerHTML =``;
+      for (let i = 0; i < data.length; i++) {
+        const element = data[i].name;
+        const img = data[i].image;
+        const no = data[i].id;
+        document.getElementById('cont').innerHTML += `
+        <div class="col-md-4">
+          <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
+            <div class="card bg-dark text-white mb-4 shadow-sm">
+              <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
+              <div class="card-body">
+                        <p id="myImg`+ i + `" class="card-text">` + element + `</p>
+                    </div>
+                  </div>
+                </a>
+              </div>
+              `;
+              console.log(element);
+              console.log(img);
+              console.log(i);
+            }
+          }
+          fread();
+          async function find(){
+            document.getElementById('cont').innerHTML =``;
+            var search=document.getElementById("search").value;
+            if (!search) {
+              search="''";  
+              document.getElementById('cont').innerHTML =`<h3>no results</h3>`;
+            }
+        console.log(search);
+        let f=await fetch('https://moviespaceproj.herokuapp.com/apisearch/'+search);
+        let data=await f.json();
         for (let i = 0; i < data.length; i++) {
           const element = data[i].name;
           const img = data[i].image;
           const no = data[i].id;
-          document.getElementById('cont').innerHTML += `
-        <div class="col-md-4">
-            <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
-                <div class="card bg-dark text-white mb-4 shadow-sm">
-                    <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
-                    <div class="card-body">
-                        <p id="myImg`+ i + `" class="card-text">` + element + `</p>
-                    </div>
-                </div>
-            </a>
-        </div>
-        `;
           console.log(element);
           console.log(img);
           console.log(i);
+          document.getElementById('cont').innerHTML += `
+          <div class="col-md-4">
+              <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
+                  <div class="card bg-dark text-white mb-4 shadow-sm">
+                      <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
+                      <div class="card-body">
+                          <p id="myImg`+ i + `" class="card-text">` + element + `</p>
+                      </div>
+                  </div>
+              </a>
+          </div>
+          `;
         }
-      }
-      fread();
-      function find(){
-        var search=document.getElementById("search").value;
-        console.log(search);
-        document.getElementById("sear").href=search;
       }
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
