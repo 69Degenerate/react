@@ -124,6 +124,10 @@
             console.log(search);
             let f=await fetch('http://127.0.0.1:8080/searchyear/'+search);
             let data=await f.json();
+            if (data.length === 0)
+            { 
+              document.getElementById('cont').innerHTML =`<h3>no results</h3>`;
+            }
             for (let i = 0; i < data.length; i++)
             {
               const element = data[i].name;
@@ -153,6 +157,10 @@
             console.log(search);
             let f=await fetch('http://127.0.0.1:8080/searchgerne/'+search);
             let data=await f.json();
+            if (data.length === 0)
+            { 
+              document.getElementById('cont').innerHTML =`<h3>no results</h3>`;
+            }
             for (let i = 0; i < data.length; i++)
             {
               const element = data[i].name;
