@@ -25,11 +25,11 @@
             Gerne
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Thriller</a>
-            <a class="dropdown-item" href="#">Mystery</a>
-            <a class="dropdown-item" href="#">Thriller</a>
-            <a class="dropdown-item" href="#">sci-fi</a>
+            <a class="dropdown-item" onclick="gerne('action')" value="action" href="#">Action</a>
+            <a class="dropdown-item" onclick="gerne('thriller')" value="thriller" href="#">Thriller</a>
+            <a class="dropdown-item" onclick="gerne('mystery')" value="mystery" href="#">Mystery</a>
+            <a class="dropdown-item" onclick="gerne('adventure')" value="adventure" href="#">Thriller</a>
+            <a class="dropdown-item" onclick="gerne('sci-fi')" value="sci-fi" href="#">sci-fi</a>
           </div>
         </li>
         <li class="nav-item dropdown">
@@ -37,15 +37,13 @@
             Year
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">2012</a>
-              <a class="dropdown-item" href="#">2013</a>
-              <a class="dropdown-item" href="#">2014</a>
-              <a class="dropdown-item" href="#">2015</a>
-              <a class="dropdown-item" href="#">2016</a>
+              <a class="dropdown-item" onclick="year('2012')" href="#">2012</a>
+              <a class="dropdown-item" onclick="year('2013')" href="#">2013</a>
+              <a class="dropdown-item" onclick="year('2014')" href="#">2014</a>
+              <a class="dropdown-item" onclick="year('2015')" href="#">2015</a>
+              <a class="dropdown-item" onclick="year('2016')" href="#">2016</a>
+              <a class="dropdown-item" onclick="year('2017')" href="#">2017</a>
           </div>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="#">Disabled</a>
         </li>
       </ul>
       <div class="form-inline my-2 my-lg-0">
@@ -85,37 +83,99 @@
             }
           }
           fread();
-          async function find(){
+          
+          async function find()
+          {
             document.getElementById('cont').innerHTML =``;
             var search=document.getElementById("search").value;
             if (!search) {
               search="''";  
               document.getElementById('cont').innerHTML =`<h3>no results</h3>`;
             }
-        console.log(search);
-        let f=await fetch('https://moviespaceproj.herokuapp.com/apisearch/'+search);
-        let data=await f.json();
-        for (let i = 0; i < data.length; i++) {
-          const element = data[i].name;
-          const img = data[i].image;
-          const no = data[i].id;
-          console.log(element);
-          console.log(img);
-          console.log(i);
-          document.getElementById('cont').innerHTML += `
-          <div class="col-md-4">
-              <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
-                  <div class="card bg-dark text-white mb-4 shadow-sm">
-                      <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
-                      <div class="card-body">
-                          <p id="myImg`+ i + `" class="card-text">` + element + `</p>
+            console.log(search);
+            let f=await fetch('https://moviespaceproj.herokuapp.com/apisearch/'+search);
+            let data=await f.json();
+            for (let i = 0; i < data.length; i++)
+            {
+              const element = data[i].name;
+              const img = data[i].image;
+              const no = data[i].id;
+              console.log(element);
+              console.log(img);
+              console.log(i);
+              document.getElementById('cont').innerHTML += `
+              <div class="col-md-4">
+                  <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
+                      <div class="card bg-dark text-white mb-4 shadow-sm">
+                          <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
+                          <div class="card-body">
+                              <p id="myImg`+ i + `" class="card-text">` + element + `</p>
+                          </div>
                       </div>
-                  </div>
-              </a>
-          </div>
-          `;
-        }
-      }
+                  </a>
+              </div>
+              `;
+            }
+          }
+
+          async function year(search)
+          {
+            document.getElementById('cont').innerHTML =``;
+            console.log(search);
+            let f=await fetch('http://127.0.0.1:8080/searchyear/'+search);
+            let data=await f.json();
+            for (let i = 0; i < data.length; i++)
+            {
+              const element = data[i].name;
+              const img = data[i].image;
+              const no = data[i].id;
+              console.log(element);
+              console.log(img);
+              console.log(i);
+              document.getElementById('cont').innerHTML += `
+              <div class="col-md-4">
+                  <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
+                      <div class="card bg-dark text-white mb-4 shadow-sm">
+                          <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
+                          <div class="card-body">
+                              <p id="myImg`+ i + `" class="card-text">` + element + `</p>
+                          </div>
+                      </div>
+                  </a>
+              </div>
+              `;
+            }
+          }
+
+          async function gerne(search)
+          {
+            document.getElementById('cont').innerHTML =``;
+            console.log(search);
+            let f=await fetch('http://127.0.0.1:8080/searchgerne/'+search);
+            let data=await f.json();
+            for (let i = 0; i < data.length; i++)
+            {
+              const element = data[i].name;
+              const img = data[i].image;
+              const no = data[i].id;
+              console.log(element);
+              console.log(img);
+              console.log(i);
+              document.getElementById('cont').innerHTML += `
+              <div class="col-md-4">
+                  <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
+                      <div class="card bg-dark text-white mb-4 shadow-sm">
+                          <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
+                          <div class="card-body">
+                              <p id="myImg`+ i + `" class="card-text">` + element + `</p>
+                          </div>
+                      </div>
+                  </a>
+              </div>
+              `;
+            }
+          }
+
     </script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
       integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
