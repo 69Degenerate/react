@@ -67,7 +67,7 @@
         const no = data[i].id;
         document.getElementById('cont').innerHTML += `
         <div class="col-md-4">
-          <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
+          <a href="#" onclick="down(`+no+`)">
             <div class="card bg-dark text-white mb-4 shadow-sm">
               <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
               <div class="card-body">
@@ -83,6 +83,8 @@
             }
           }
           fread();
+          
+          
           
           async function find()
           {
@@ -105,19 +107,71 @@
               console.log(i);
               document.getElementById('cont').innerHTML += `
               <div class="col-md-4">
-                  <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
-                      <div class="card bg-dark text-white mb-4 shadow-sm">
-                          <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
-                          <div class="card-body">
+                <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
+                  <div class="card bg-dark text-white mb-4 shadow-sm">
+                    <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
+                    <div class="card-body">
                               <p id="myImg`+ i + `" class="card-text">` + element + `</p>
+                            </div>
                           </div>
+                        </a>
                       </div>
-                  </a>
+              `;
+            }
+          }
+          
+
+          async function down(search)
+          {
+            document.getElementById('cont').innerHTML =``;
+            console.log(search);
+            let f=await fetch('http://127.0.0.1:8080/apireadone/'+search);
+            let data=await f.json();
+            if (data.length === 0)
+            { 
+              document.getElementById('cont').innerHTML =`<h3>no results</h3>`;
+            }
+            for (let i = 0; i < data.length; i++)
+            {
+              const element = data[i].name;
+              const img = data[i].image;
+              const no = data[i].id;
+              console.log(element);
+              console.log(img);
+              console.log(i);
+              document.getElementById('cont').innerHTML += `
+                <div class="container text-white">
+                  <center>
+                      <br>
+                      <h3><b>`+data[i].name+`</b></h3>
+                      <img src="`+data[i].image+`" alt="" class="d-block w-50" >
+                      <p><b>name: </b>`+data[i].name+`</p>
+                      <p><b>release year:</b>`+data[i].release_year+`</p>
+                      <p><b>gerne: </b>`+data[i].gerne+`</p>
+                      <p><b>imdb: </b>`+data[i].imdb+`</p>
+                      <p><b>rotten tometos: </b>`+data[i].rt+`</p>
+                      
+                      <div class="container" style=" width: 50%;">
+                          <p><b>cast:</b><br>`+data[i].cast+`</p>
+                          <p><b>info:</b><br>`+data[i].desc+`</p>
+                          <br>   
+                          <h3><b>Download</b></h3>
+                          <h4>`+data[i].name+` [`+data[i].size480p+`]</h4>
+                          <a href="`+data[i].link480p+`" class="btn btn-outline-success btn-lg my-2 my-sm-0" role="button" aria-pressed="true">480p</a>
+                          <br><br>
+                          <h4>`+data[i].name+` [`+data[i].size720p+`]</h4>
+                          <a href="`+data[i].link720p+`" class="btn btn-outline-success btn-lg my-2 my-sm-0" role="button" aria-pressed="true">720p</a>
+                          <br><br>
+                          <h4>`+data[i].name+` [`+data[i].size1080p+`]</h4>
+                          <a href="`+data[i].link1080p+`" class="btn btn-outline-success btn-lg my-2 my-sm-0" role="button" aria-pressed="true">1080p</a>
+                          <br>
+                      </div>
+                      
+                  </center>
               </div>
               `;
             }
           }
-
           async function year(search)
           {
             document.getElementById('cont').innerHTML =``;
