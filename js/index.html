@@ -95,7 +95,7 @@
               document.getElementById('cont').innerHTML =`<h3>no results</h3>`;
             }
             console.log(search);
-            let f=await fetch('https://moviespaceproj.herokuapp.com/apisearch/'+search);
+            let f=await fetch('http://sitesforvishal.pythonanywhere.com/apisearch/'+search);
             let data=await f.json();
             for (let i = 0; i < data.length; i++)
             {
