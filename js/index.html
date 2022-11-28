@@ -57,6 +57,8 @@
     </div>
   </div>
   <script>
+    const csrftoken = getCookie('csrftoken');
+    fread();
     async function fread() {
       let f = await fetch('https://moviespaceproj.herokuapp.com/apiread');
       let data = await f.json();
@@ -82,11 +84,8 @@
               console.log(i);
             }
           }
-          fread();
-          
-          
-          
-          async function find()
+     
+    async function find()
           {
             document.getElementById('cont').innerHTML =``;
             var search=document.getElementById("search").value;
@@ -120,11 +119,25 @@
             }
           }
           
-
-          async function down(search)
+    function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        
+    async function down(search)
           {
             document.getElementById('cont').innerHTML =``;
-            console.log(search);
             let f=await fetch('http://sitesforvishal.pythonanywhere.com/apireadone/'+search);
             let data=await f.json();
             if (data.length === 0)
@@ -136,9 +149,6 @@
               const element = data[i].name;
               const img = data[i].image;
               const no = data[i].id;
-              console.log(element);
-              console.log(img);
-              console.log(i);
               document.getElementById('cont').innerHTML += `
                 <div class="container text-white">
                   <center>
@@ -165,34 +175,79 @@
                           <h4>`+data[i].name+` [`+data[i].size1080p+`]</h4>
                           <a href="`+data[i].link1080p+`" class="btn btn-outline-success btn-lg my-2 my-sm-0" role="button" aria-pressed="true">1080p</a>
                           <br>
-                      </div>
-                      
+                      </div>  
                   </center>
+                  <br><br>
+                  <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+                  <footer><div class="container">
+                    <div class="container mb-3 py-4">
+                        <h2 class="text">Leave a Reply</h2>
+                        <div class="mb-3">
+                            <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                            <textarea class="form-control bg-dark text-white" id="desc" name="desc" rows="3" placeholder="Enter Comment"></textarea>
+                          </div>
+                          <div class="row">
+                              <div class="col form-group">
+                                  <label for="name">Name</label>
+                                  <input  type="text" class="form-control bg-dark text-white" id="name" name="name" placeholder="Enter your Name">
+                              </div>
+                      
+                              <div class="col form-group">
+                                  <label for="email">Email address</label>
+                                  <input type="email" class="form-control bg-dark text-white" id="email" name="email" placeholder="Enter Your Email">
+                              </div>
+                          </div>
+                            <button class="btn btn-primary" onclick="fom(`+data[i].id+`)">Submit</button>
+                    
+                    </div>
+                </div>
+                </footer>
               </div>
               `;
             }
           }
-          async function year(search)
+
+    function fom(search){
+        var d=document.getElementById("desc").value;
+        var n=document.getElementById("name").value;
+        var e=document.getElementById("email").value;
+        console.log(d);
+        console.log(n);
+        console.log(e);
+        fetch('http://127.0.0.1:8000/create', {
+          method: 'POST',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'X-CSRFToken': csrftoken
+          },
+          body: JSON.stringify({
+            "name": n,
+            "email": e,
+            "decs": d
+            })
+          })
+          .then(response => response.json())
+          .then(response => alert("response have been submited")).then(down(search))
+        }
+        
+    async function year(search)
           {
             document.getElementById('cont').innerHTML =``;
-            console.log(search);
-            let f=await fetch('http://sitesforvishal.pythonanywhere.com/searchyear/'+search);
+            let f=await fetch('https://moviespaceproj.herokuapp.com/searchyear/'+search);
             let data=await f.json();
             if (data.length === 0)
             { 
-              document.getElementById('cont').innerHTML =`<h3 style="color:white;">no results</h3>`;
+              document.getElementById('cont').innerHTML =`<h3>no results</h3>`;
             }
             for (let i = 0; i < data.length; i++)
             {
               const element = data[i].name;
               const img = data[i].image;
               const no = data[i].id;
-              console.log(element);
-              console.log(img);
-              console.log(i);
               document.getElementById('cont').innerHTML += `
               <div class="col-md-4">
-                  <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
+                <a href="#" onclick="down(`+no+`)">
                       <div class="card bg-dark text-white mb-4 shadow-sm">
                           <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
                           <div class="card-body">
@@ -205,15 +260,15 @@
             }
           }
 
-          async function gerne(search)
+    async function gerne(search)
           {
             document.getElementById('cont').innerHTML =``;
             console.log(search);
-            let f=await fetch('http://sitesforvishal.pythonanywhere.com/searchgerne/'+search);
+            let f=await fetch('https://moviespaceproj.herokuapp.com/searchgerne/'+search);
             let data=await f.json();
             if (data.length === 0)
             { 
-              document.getElementById('cont').innerHTML =`<h3 style="color:white;">no results</h3>`;
+              document.getElementById('cont').innerHTML =`<h3>no results</h3>`;
             }
             for (let i = 0; i < data.length; i++)
             {
@@ -225,7 +280,7 @@
               console.log(i);
               document.getElementById('cont').innerHTML += `
               <div class="col-md-4">
-                  <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
+                <a href="#" onclick="down(`+no+`)">
                       <div class="card bg-dark text-white mb-4 shadow-sm">
                           <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
                           <div class="card-body">
