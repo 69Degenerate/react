@@ -60,7 +60,7 @@
     const csrftoken = getCookie('csrftoken');
     fread();
     async function fread() {
-      let f = await fetch('https://moviespaceproj.herokuapp.com/apiread');
+      let f = await fetch('http://sitesforvishal.pythonanywhere.com/apiread');
       let data = await f.json();
       document.getElementById('cont').innerHTML =``;
       for (let i = 0; i < data.length; i++) {
@@ -214,7 +214,7 @@
         console.log(d);
         console.log(n);
         console.log(e);
-        fetch('http://127.0.0.1:8000/create', {
+        fetch('http://sitesforvishal.pythonanywhere.com/create', {
           method: 'POST',
           headers: {
               'Accept': 'application/json',
