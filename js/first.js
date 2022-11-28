@@ -28,3 +28,10 @@ async function sdata(char){
   }
   return data;
 }
+
+async function name() {
+  var api= await (await fetch("http://127.0.0.1:8000/con")).json();
+  var filtered = api.filter(a => a.name == "Ave");
+  console.log(filtered);
+}
+name();
