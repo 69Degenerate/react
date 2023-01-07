@@ -106,7 +106,7 @@
               console.log(i);
               document.getElementById('cont').innerHTML += `
               <div class="col-md-4">
-                <a href="https://moviespaceproj.herokuapp.com/download/`+ no + `">
+                <a href="http://sitesforvishal.pythonanywhere.com/download/`+ no + `">
                   <div class="card bg-dark text-white mb-4 shadow-sm">
                     <img id="name`+ i + `" src="` + img + `" class="d-block w-100" alt="...">
                     <div class="card-body">
@@ -234,7 +234,7 @@
     async function year(search)
           {
             document.getElementById('cont').innerHTML =``;
-            let f=await fetch('https://moviespaceproj.herokuapp.com/searchyear/'+search);
+            let f=await fetch('http://sitesforvishal.pythonanywhere.com/searchyear/'+search);
             let data=await f.json();
             if (data.length === 0)
             { 
@@ -264,7 +264,7 @@
           {
             document.getElementById('cont').innerHTML =``;
             console.log(search);
-            let f=await fetch('https://moviespaceproj.herokuapp.com/searchgerne/'+search);
+            let f=await fetch('http://sitesforvishal.pythonanywhere.com/searchgerne/'+search);
             let data=await f.json();
             if (data.length === 0)
             { 
